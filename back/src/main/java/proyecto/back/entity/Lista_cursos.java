@@ -5,7 +5,7 @@ public class Lista_cursos {
 	private String curso;
 	private int codigo;
 	private String grupo;
-	private int dia;
+	private String dia;
 	
 	
 	public String getCurso() {
@@ -26,10 +26,10 @@ public class Lista_cursos {
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
-	public int getDia() {
+	public String getDia() {
 		return dia;
 	}
-	public void setDia(int dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
 	

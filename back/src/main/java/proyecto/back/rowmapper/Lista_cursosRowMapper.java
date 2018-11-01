@@ -16,7 +16,7 @@ public class Lista_cursosRowMapper implements RowMapper<Lista_cursos>{
 		curso.setCurso(rs.getString("curso"));
 		curso.setCodigo(rs.getInt("codigo"));
 		curso.setGrupo(rs.getString("grupo"));
-		curso.setDia(rs.getInt("dia"));
+		curso.setDia(rs.getString("dia"));
 		
 		
 		return curso;
