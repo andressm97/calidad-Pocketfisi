@@ -15,9 +15,9 @@ public class DelegadoService  {
 	@Autowired
 	IDelegadoDAO delegadoDAO;
 	
-	public List<Cursos_delegado> mostrarcursos(String codigo,int hora){
-		List<Cursos_delegado> lista=delegadoDAO.mostrarcursos(codigo, hora);
-		return lista;
+	public Cursos_delegado mostrarcursos(String codigo,int hora){
+		Cursos_delegado curso=delegadoDAO.mostrarcursos(codigo, hora);
+		return curso;
 	}
 	
 	public List<Delegado> delegadoBYcodigo(String codigo){

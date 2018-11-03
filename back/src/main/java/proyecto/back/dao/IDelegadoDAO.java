@@ -7,7 +7,7 @@ import proyecto.back.entity.Delegado;
 
 public interface IDelegadoDAO {
 	
-	List<Cursos_delegado> mostrarcursos(String codigo,int hora);
+	Cursos_delegado mostrarcursos(String codigo,int hora);
 	
 	List<Delegado> cursosDelegado(String codigo);
 

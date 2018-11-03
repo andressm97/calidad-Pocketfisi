@@ -85,7 +85,7 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 		
 		}
 		catch(DataAccessException e) {
-			System.out.println("errror wee"+ e.getMessage());
+			System.out.println("errror "+ e.getMessage());
 					return false;
 		}
 		

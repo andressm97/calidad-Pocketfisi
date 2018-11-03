@@ -3,6 +3,8 @@ package proyecto.back.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -11,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import proyecto.back.dao.IDelegadoDAO;
 import proyecto.back.entity.Cursos_delegado;
 import proyecto.back.entity.Delegado;
-import proyecto.back.rowmapper.Cursos_delegadoRowMapper;
 import proyecto.back.rowmapper.DelegadoRowMapper;
 
 @Transactional
@@ -22,11 +23,18 @@ public class DelegadoDaoImpl implements IDelegadoDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Cursos_delegado> mostrarcursos(String codigo, int hora) {
+	public Cursos_delegado mostrarcursos(String codigo, int hora) {
 		
-		String sql="select * from fn_llamar_soporte(?,?)";
-		RowMapper<Cursos_delegado> rowMapper= new Cursos_delegadoRowMapper();
-		return jdbcTemplate.query(sql, rowMapper,codigo,hora);
+		try {
+		String sql="select * from fn_llamar_soporte(?,?) LIMIT 1";
+		RowMapper<Cursos_delegado> rowMapper= new BeanPropertyRowMapper<Cursos_delegado>(Cursos_delegado.class);
+		Cursos_delegado curso=jdbcTemplate.queryForObject(sql,rowMapper,codigo,hora);
+		return  curso;
+		}
+		catch(DataAccessException e) {
+			System.out.println("errror : "+ e.getMessage());
+			return new Cursos_delegado();
+		}
 	}
 
 	@Override
