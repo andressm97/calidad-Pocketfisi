@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import proyecto.back.entity.Cursos_delegado;
 import proyecto.back.entity.Delegado;
-
+import proyecto.back.entity.Hora;
 import proyecto.back.service.DelegadoService;
 
 @RestController
@@ -31,15 +31,16 @@ public class DelegadoController {
 	@RequestMapping(value="/{codigo}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map> getCurso_delegado2(@PathVariable("codigo") String codigo){
 		
-		Calendar calendario = new GregorianCalendar();
-		int hora=calendario.get(Calendar.HOUR_OF_DAY);
+		//Calendar calendario = new GregorianCalendar();
+		Hora hora2= service.HoraActual();
+		//int hora=calendario.get(Calendar.HOUR_OF_DAY);
 		
 		Cursos_delegado curso=null;
 		List<Delegado> lista2=null;
 		lista2=service.delegadoBYcodigo(codigo);
-		System.out.println("hora" + hora);
+		System.out.println("hora" + hora2);
 		
-		curso= service.mostrarcursos(codigo,hora);
+		curso= service.mostrarcursos(codigo,hora2.getHora());
 		System.out.println(curso.toString());
 		
 		

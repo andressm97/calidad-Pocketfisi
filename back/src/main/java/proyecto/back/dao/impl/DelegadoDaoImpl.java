@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import proyecto.back.dao.IDelegadoDAO;
 import proyecto.back.entity.Cursos_delegado;
 import proyecto.back.entity.Delegado;
+import proyecto.back.entity.Hora;
 import proyecto.back.rowmapper.DelegadoRowMapper;
 
 @Transactional
@@ -44,6 +45,25 @@ public class DelegadoDaoImpl implements IDelegadoDAO {
 		RowMapper<Delegado>rowMapper=new DelegadoRowMapper();
 		
 		return jdbcTemplate.query(sql,rowMapper,codigo);
+	}
+
+	@Override
+	public Hora horaAactual() {
+		try {
+		String sql="select * from extract(hour from  (SELECT NOW() )) AS hora,extract(minute from  (SELECT NOW() )) AS minutos;";
+		RowMapper<Hora> rowMapper= new BeanPropertyRowMapper<Hora>(Hora.class);
+		Hora curso=jdbcTemplate.queryForObject(sql,rowMapper);
+		return curso;
+		}catch(DataAccessException e) {
+			
+			System.out.println("errrorhora : "+ e.getMessage());
+			return new Hora();
+		}
+		
+		
+		
+		
+	
 	}
 
 }
