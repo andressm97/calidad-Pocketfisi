@@ -9,7 +9,7 @@ public class Usuario {
 	private String password;
 	private String mobile;
 	private String id_profile;
-	private int delegate;
+
 	
 	private boolean toQuery;
 	
@@ -64,12 +64,8 @@ public class Usuario {
 	public void setId_profile(String id_profile) {
 		this.id_profile = id_profile;
 	}
-	public int getDelegate() {
-		return delegate;
-	}
-	public void setDelegate(int delegate) {
-		this.delegate = delegate;
-	}
+	
+	
 	 @Override
 	public String toString() {
 		// TODO Auto-generated method stub

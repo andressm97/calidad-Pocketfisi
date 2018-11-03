@@ -33,7 +33,7 @@ public class Lista_cursos_mobilController {
 			}
 			
 		} catch (Exception e) {
-			
+		
 			return new ResponseEntity<List<Listar_cursos_mobil>>(lista, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

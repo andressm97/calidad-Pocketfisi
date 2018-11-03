@@ -3,7 +3,7 @@ package proyecto.back.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -84,8 +84,8 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 			}
 		
 		}
-		catch(EmptyResultDataAccessException e) {
-			System.out.println("errror wee");
+		catch(DataAccessException e) {
+			System.out.println("errror wee"+ e.getMessage());
 					return false;
 		}
 		

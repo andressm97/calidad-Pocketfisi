@@ -20,7 +20,7 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
 		usuario.setPassword(rs.getString("password"));
 		usuario.setMobile(rs.getString("mobile"));
 		usuario.setId_profile(rs.getString("id_profile"));
-		usuario.setDelegate(rs.getInt("delegate"));
+		
 		
 		return usuario;
 	}
