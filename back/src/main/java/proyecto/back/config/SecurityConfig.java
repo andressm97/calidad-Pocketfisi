@@ -1,4 +1,5 @@
-/*package proyecto.back.config;
+/*
+package proyecto.back.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,9 +16,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().authorizeRequests()
 		.antMatchers("/login").permitAll() 
 		.anyRequest().authenticated()
-		.and();
-		//.addFilterBefore(filter, beforeFilter)
-		
+		.and()
+		.addFilterBefore(new LoginFilter("/login", authenticationManager()),
+                UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new JwtFilter(),
+                UsernamePasswordAuthenticationFilter.class);
 	}
 	
-}*/
+}
+*/

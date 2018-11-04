@@ -1,7 +1,9 @@
 package proyecto.back.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,6 +101,36 @@ public class UsuarioController {
 			
 			
 		}
+		@RequestMapping(value="/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<Map<String, String>> VerificarUsuario(@RequestBody Usuario usuario){
+			
+			logger.info(">mostrarusuario["+usuario+"]"+" "+usuario.getId_user());
+			Usuario user = null;
+			Map<String,String> map= new HashMap<>();
+			try {
+				
+				user= service.MostrarUsuario(usuario.getUsername(),usuario.getPassword());
+				logger.info(">mostrarusuarioenv["+user+"]"+" ");
+				map.put("nombre", user.getName()+" "+user.getLastname());
+				map.put("existe","true");
+				
+				return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
+				
+				
+			} catch (Exception e) {
+				logger.info(">mostrarusuarioenv["+user+"]"+" ");
+				map.put("existe", "false");
+				return new ResponseEntity<Map<String, String>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+
+
+			
+			
+			
+		
+		}
+		
 		
 		
 		

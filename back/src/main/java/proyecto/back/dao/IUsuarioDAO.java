@@ -12,6 +12,8 @@ public interface IUsuarioDAO {
 	//void actualizarUsuario(Usuario usuario);
 	//void eliminarUsuario(String id_usuario);
 	boolean getIdUsuario(String id_user); 
+	
+	Usuario mostrarUsuario(String username,String pasword); 
 		
 	
 

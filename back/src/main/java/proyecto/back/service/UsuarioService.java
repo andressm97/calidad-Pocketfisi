@@ -28,6 +28,11 @@ public class UsuarioService {
 	public boolean getIdUsuario(String id_user) {
 		return usuarioDAO.getIdUsuario(id_user);
 	}
+	public Usuario MostrarUsuario(String username,String password) {
+		
+		Usuario usuario =usuarioDAO.mostrarUsuario(username, password);
+		return usuario;
+	}
 	
 	
 	

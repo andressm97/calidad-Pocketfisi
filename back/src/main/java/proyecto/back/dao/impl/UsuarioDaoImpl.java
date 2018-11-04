@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -90,6 +91,21 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 		}
 		
 		
+		
+		
+	}
+
+
+
+
+
+	@Override
+	public Usuario mostrarUsuario(String username, String password) {
+			
+		String sql="select *from users where username=CONCAT(?,'@unmsm.edu.pe') and password=?";
+		RowMapper<Usuario> rowMapper =new BeanPropertyRowMapper<Usuario>(Usuario.class);
+		Usuario alumno = JdbcTemplate.queryForObject(sql, rowMapper,username,password);
+		return alumno;
 		
 		
 	}
