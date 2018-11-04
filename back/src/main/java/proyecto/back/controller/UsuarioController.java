@@ -1,7 +1,8 @@
 package proyecto.back.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,13 +107,18 @@ public class UsuarioController {
 			
 			logger.info(">mostrarusuario["+usuario+"]"+" "+usuario.getId_user());
 			Usuario user = null;
-			Map<String,String> map= new HashMap<>();
+			Map<String,String> map= new LinkedHashMap<>();
 			try {
 				
 				user= service.MostrarUsuario(usuario.getUsername(),usuario.getPassword());
 				logger.info(">mostrarusuarioenv["+user+"]"+" ");
-				map.put("nombre", user.getName()+" "+user.getLastname());
 				map.put("existe","true");
+				map.put("nombre", user.getName()+" "+user.getLastname());
+				map.put("codigo", user.getId_user());
+				map.put("telefono",user.getMobile());
+				map.put("perfil", user.getId_profile());
+				
+				
 				
 				return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 				
