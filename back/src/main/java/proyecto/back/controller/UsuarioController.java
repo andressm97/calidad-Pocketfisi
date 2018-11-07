@@ -126,7 +126,7 @@ public class UsuarioController {
 			} catch (Exception e) {
 				logger.info(">mostrarusuarioenv["+user+"]"+" ");
 				map.put("existe", "false");
-				return new ResponseEntity<Map<String, String>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<Map<String, String>>(map, HttpStatus.ACCEPTED);
 			}
 			
 
