@@ -1,5 +1,8 @@
 package proyecto.back.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import proyecto.back.entity.Lista_cursos;
+import proyecto.back.entity.CursosSUM;
 import proyecto.back.service.Lista_cursosService;
 
 @RestController
 @RequestMapping("/cursos")
-public class Lista_cursosController {
+public class CursosController {
 	
 	@Autowired
 	private Lista_cursosService service;
@@ -45,6 +52,36 @@ public class Lista_cursosController {
 		
 		
 	}
+	
+	@RequestMapping(value="/insertar", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+		
+	public boolean AgregarLista_cursos() throws IOException {
+		
+		 List<CursosSUM> cursos= new ArrayList<CursosSUM>() ;
+		//recogiendo datos del SUM FAKE
+			URL url = new URL("https://sum-calidad.herokuapp.com/tabla/listar");
+			
+			ObjectMapper mapper = new ObjectMapper();
+			TypeReference<List<CursosSUM>> typeReference = new TypeReference<List<CursosSUM>>(){};
+	
+			InputStream inputStream = url.openStream();
+			try {
+				cursos = mapper.readValue(inputStream,typeReference);
+				System.out.println("USUARIOS GUARDADOS : " + cursos.get(0).getDocente());
+			} catch (IOException e){
+				System.out.println("ERROR! USUARIOS NO GUARDADOS : " + e.getMessage());
+			}
+		
+		//Agregando la lista a la base de datos
+		
+			boolean xd=service.agregarListaCursos(cursos);
+		
+		
+		
+		return xd;
+	}
+	
+	
 	
 
 }
