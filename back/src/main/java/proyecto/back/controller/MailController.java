@@ -31,7 +31,7 @@ public class MailController {
 		
 		if(insertado) {
 			
-			service.sendMail("andres.satornicio@gmail.com", "soportefisi18@gmail.com",mensaje.getAsunto(),mensaje.getMensaje());
+			service.sendMail("necesito.soporte18@gmail.com", "soportefisi18@gmail.com",mensaje.getAsunto(),mensaje.getMensaje());
 			return true;
 		}
 		
