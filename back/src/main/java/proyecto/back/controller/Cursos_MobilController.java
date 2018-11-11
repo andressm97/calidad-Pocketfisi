@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.back.entity.Listar_cursos_mobil;
-import proyecto.back.service.Lista_curso_mobilService;
+import proyecto.back.entity.Cursos_Mobil;
+import proyecto.back.service.Curso_MobilService;
 
 
 @RestController
 @RequestMapping("/cursos_mb")
-public class Lista_cursos_mobilController {
+public class Cursos_MobilController {
 	@Autowired
-	private Lista_curso_mobilService service;
+	private Curso_MobilService service;
 	@RequestMapping(value="/listar/{dia}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseEntity<List<Listar_cursos_mobil>> getSubs(@PathVariable("dia") String dia){
-		List<Listar_cursos_mobil> lista = null;
+	public ResponseEntity<List<Cursos_Mobil>> getSubs(@PathVariable("dia") String dia){
+		List<Cursos_Mobil> lista = null;
 		try {
 			lista  = service.cursolist(dia);
 
 			if (lista == null) {
-				lista = new ArrayList<Listar_cursos_mobil>();
+				lista = new ArrayList<Cursos_Mobil>();
 			}
 			
 		} catch (Exception e) {
 		
-			return new ResponseEntity<List<Listar_cursos_mobil>>(lista, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<Cursos_Mobil>>(lista, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 
-		return new ResponseEntity<List<Listar_cursos_mobil>>(lista, HttpStatus.OK);
+		return new ResponseEntity<List<Cursos_Mobil>>(lista, HttpStatus.OK);
 		
 		
 	}

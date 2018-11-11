@@ -11,23 +11,23 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import proyecto.back.dao.ILista_cursosDAO;
-import proyecto.back.entity.Lista_cursos;
+import proyecto.back.dao.CursosDAO;
+import proyecto.back.entity.Cursos;
 import proyecto.back.entity.CursosSUM;
 import proyecto.back.rowmapper.Lista_cursosRowMapper;
 
 @Transactional
 @Repository
-public class Lista_cursosDaoImpl implements ILista_cursosDAO{
+public class CursosDaoImpl implements CursosDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Override
-	public List<Lista_cursos> getListaCurso() {
+	public List<Cursos> getListaCurso() {
 		
 		String sql="select * from fn_listar_cursos()";
 		
-		RowMapper<Lista_cursos> rowmapper= new Lista_cursosRowMapper();
+		RowMapper<Cursos> rowmapper= new Lista_cursosRowMapper();
 		
 		return this.jdbcTemplate.query(sql,rowmapper);
 	}
@@ -59,7 +59,7 @@ public class Lista_cursosDaoImpl implements ILista_cursosDAO{
 		
 		System.out.println(ret.getRow());
 		
-		if(ret!=null) {
+		if(ret.getRow()==0) {
 			return true;
 		}
 		

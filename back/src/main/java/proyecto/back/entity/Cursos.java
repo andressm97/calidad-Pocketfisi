@@ -1,6 +1,6 @@
 package proyecto.back.entity;
 
-public class Lista_cursos {
+public class Cursos {
 	
 	private String curso;
 	private int codigo;

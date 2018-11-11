@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import proyecto.back.entity.Listar_cursos_mobil;
+import proyecto.back.entity.Cursos_Mobil;
 
-public class Listar_cursos_mobilRowMapper implements RowMapper<Listar_cursos_mobil> {
+public class Listar_cursos_mobilRowMapper implements RowMapper<Cursos_Mobil> {
 
 	@Override
-	public Listar_cursos_mobil mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Listar_cursos_mobil cursos = new Listar_cursos_mobil();
+	public Cursos_Mobil mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Cursos_Mobil cursos = new Cursos_Mobil();
 		cursos.setSeccion(rs.getString("seccion"));
 		cursos.setCurso(rs.getString("curso"));
 		cursos.setProfesor(rs.getString("profesor"));
@@ -20,6 +20,7 @@ public class Listar_cursos_mobilRowMapper implements RowMapper<Listar_cursos_mob
 		cursos.setFin(rs.getInt("fin"));
 		cursos.setTipo(rs.getString("tipo"));
 		cursos.setCiclo(rs.getInt("ciclo"));
+		cursos.setSalon(rs.getString("salon"));
 		
 		
 				

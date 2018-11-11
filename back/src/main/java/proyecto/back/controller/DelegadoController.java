@@ -27,40 +27,40 @@ public class DelegadoController {
 	private DelegadoService service;
 	
 	@RequestMapping(value="/{codigo}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map> getCurso_delegado2(@PathVariable("codigo") String codigo){
+	public ResponseEntity<Map<Object,Object>> getCurso_delegado2(@PathVariable("codigo") String codigo){
 		
-		//Calendar calendario = new GregorianCalendar();
+		
 		Hora hora2= service.HoraActual();
-		//int hora=calendario.get(Calendar.HOUR_OF_DAY);
+
 		
 		Cursos_delegado curso=null;
 		List<Delegado> lista2=null;
 		lista2=service.delegadoBYcodigo(codigo);
-		System.out.println("hora" + hora2);
+		System.out.println("hora: " + hora2);
 		
 		curso= service.mostrarcursos(codigo,hora2.getHora());
-		System.out.println(curso.toString());
+		//System.out.println(curso.toString());
 		
 		
 		if(lista2.size()!=0) {
 				
 				if(curso.getCodigo()!=0) {
-					Map Map= new HashMap<>();
-					Map.put("delegado","true");
-					Map.put("haycurso", "true");
+					Map<Object,Object> Map= new HashMap<>();
+					Map.put("delegado",true);
+					Map.put("haycurso", true);
 					Map<String,String> Map2= new HashMap<>();
 					Map2.put("nombre",curso.getCurso());
 					Map2.put("profesor",curso.getProfesor());
 					Map.put("curso",Map2);
-					return new ResponseEntity<Map>(Map, HttpStatus.OK);
+					return new ResponseEntity<Map<Object,Object>>(Map, HttpStatus.OK);
 				}
 				else {
 					// no hay curso en el rango
-					Map<String,String> Map= new HashMap<>();
-					Map.put("delegado", "true");
-					Map.put("haycurso", "false");
+					Map<Object,Object> Map= new HashMap<>();
+					Map.put("delegado", true);
+					Map.put("haycurso", false);
 					
-					return new ResponseEntity<Map>(Map,HttpStatus.OK);
+					return new ResponseEntity<Map<Object,Object>>(Map,HttpStatus.OK);
 				}
 					
 			}
@@ -71,9 +71,9 @@ public class DelegadoController {
 		
 		else {
 			
-			Map<String,String> Map= new HashMap<>();
-			Map.put("delegado", "false");
-			return new ResponseEntity<Map>(Map, HttpStatus.NOT_FOUND);
+			Map <Object,Object> Map= new HashMap<>();
+			Map.put("delegado",false);
+			return new ResponseEntity<Map<Object,Object>>(Map, HttpStatus.NOT_FOUND);
 		}
 		
 		

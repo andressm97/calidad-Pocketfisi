@@ -5,14 +5,14 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import proyecto.back.entity.Lista_cursos;
+import proyecto.back.entity.Cursos;
 
-public class Lista_cursosRowMapper implements RowMapper<Lista_cursos>{
+public class Lista_cursosRowMapper implements RowMapper<Cursos>{
 
 	@Override
-	public Lista_cursos mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Cursos mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Lista_cursos curso= new Lista_cursos();
+		Cursos curso= new Cursos();
 		curso.setCurso(rs.getString("curso"));
 		curso.setCodigo(rs.getInt("codigo"));
 		curso.setGrupo(rs.getString("grupo"));

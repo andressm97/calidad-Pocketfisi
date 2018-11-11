@@ -1,6 +1,6 @@
 package proyecto.back.entity;
 
-public class Listar_cursos_mobil {
+public class Cursos_Mobil {
 	
 	private String seccion;
 	private String curso;
@@ -10,6 +10,14 @@ public class Listar_cursos_mobil {
 	private int fin;
 	private String tipo;
 	private int ciclo;
+	private String salon;
+	
+	public String getSalon() {
+		return salon;
+	}
+	public void setSalon(String salon) {
+		this.salon = salon;
+	}
 	public String getSeccion() {
 		return seccion;
 	}

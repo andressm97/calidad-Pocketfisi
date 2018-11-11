@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import proyecto.back.dao.ILista_cursosDAO;
-import proyecto.back.entity.Lista_cursos;
+import proyecto.back.dao.CursosDAO;
+import proyecto.back.entity.Cursos;
 import proyecto.back.entity.CursosSUM;
 
 @Service
-public class Lista_cursosService {
+public class CursosService {
 	@Autowired
-	private ILista_cursosDAO ListaDAO;
+	private CursosDAO ListaDAO;
 	
-	public List<Lista_cursos> cursolist() {
+	public List<Cursos> cursolist() {
 		
-		List<Lista_cursos> curso= ListaDAO.getListaCurso();
+		List<Cursos> curso= ListaDAO.getListaCurso();
 		
 		return curso;
 	}

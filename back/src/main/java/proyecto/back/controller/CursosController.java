@@ -17,38 +17,38 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import proyecto.back.entity.Lista_cursos;
+import proyecto.back.entity.Cursos;
 import proyecto.back.entity.CursosSUM;
-import proyecto.back.service.Lista_cursosService;
+import proyecto.back.service.CursosService;
 
 @RestController
 @RequestMapping("/cursos")
 public class CursosController {
 	
 	@Autowired
-	private Lista_cursosService service;
+	private CursosService service;
 	@RequestMapping(value="/listar", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseEntity<List<Lista_cursos>> getLista_cursos(){
+	public ResponseEntity<List<Cursos>> getLista_cursos(){
 		
 		
-		List<Lista_cursos> list = null;
+		List<Cursos> list = null;
 
 		try {
 			
 			list = service.cursolist();
 			
 			if (list == null) {
-				list = new ArrayList<Lista_cursos>();
+				list = new ArrayList<Cursos>();
 			}
 		} catch (Exception e) {
 
-			return new ResponseEntity<List<Lista_cursos>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<Cursos>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 
 
-		return new ResponseEntity<List<Lista_cursos>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<Cursos>>(list, HttpStatus.OK);
 		
 		
 	}
