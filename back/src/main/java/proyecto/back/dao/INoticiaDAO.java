@@ -6,5 +6,7 @@ import proyecto.back.entity.Noticia;
 
 public interface INoticiaDAO {
 	
-	List<Noticia> ListarNoticias();
+	List<Noticia> ListarNoticias();	
+	boolean agregarNoticia(Noticia noticia);
+
 }

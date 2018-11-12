@@ -106,16 +106,16 @@ public class UsuarioController {
 			
 		}
 		@RequestMapping(value="/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<Map<String, String>> VerificarUsuario(@RequestBody Usuario usuario){
+		public ResponseEntity<Map<Object, Object>> VerificarUsuario(@RequestBody Usuario usuario){
 			
 			logger.info(">mostrarusuario["+usuario+"]"+" "+usuario.getId_user());
 			Usuario user = null;
-			Map<String,String> map= new LinkedHashMap<>();
+			Map<Object, Object> map= new LinkedHashMap<>();
 			try {
 				
 				user= service.MostrarUsuario(usuario.getUsername(),usuario.getPassword());
 				logger.info(">mostrarusuarioenv["+user+"]"+" ");
-				map.put("existe","true");
+				map.put("existe",true);
 				map.put("nombre", user.getName()+" "+user.getLastname());
 				map.put("codigo", user.getId_user());
 				map.put("telefono",user.getMobile());
@@ -123,13 +123,13 @@ public class UsuarioController {
 				
 				
 				
-				return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
+				return new ResponseEntity<Map<Object, Object>>(map, HttpStatus.OK);
 				
 				
 			} catch (Exception e) {
 				logger.info(">mostrarusuarioenv["+user+"]"+" ");
-				map.put("existe", "false");
-				return new ResponseEntity<Map<String, String>>(map, HttpStatus.ACCEPTED);
+				map.put("existe", false);
+				return new ResponseEntity<Map<Object, Object>>(map, HttpStatus.ACCEPTED);
 			}
 			
 
