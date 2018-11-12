@@ -17,4 +17,9 @@ public class NoticiaService {
 		List<Noticia> lista=iNoticiaDAO.ListarNoticias();
 		return lista;
 	}
+	
+	public boolean agregarNoticia(Noticia noticia) {
+		return iNoticiaDAO.agregarNoticia(noticia);
+	}
+	
 }

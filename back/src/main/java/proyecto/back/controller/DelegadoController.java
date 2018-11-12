@@ -73,7 +73,7 @@ public class DelegadoController {
 			
 			Map <Object,Object> Map= new HashMap<>();
 			Map.put("delegado",false);
-			return new ResponseEntity<Map<Object,Object>>(Map, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Map<Object,Object>>(Map, HttpStatus.OK);
 		}
 		
 		

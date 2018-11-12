@@ -30,12 +30,21 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 	
 	
 	@Override
-	public boolean agregarNoticia(Noticia noticia) {
-		//Integer ret=0;
-		//String sql="insert into news (title,description,category,url,start,ending,imagen,id_state,id_user) values (?,?,?,?,?,?,?,?,?)";
-		//ret=JdbcTemplate.update(sql);
+	public boolean agregarNoticia(Noticia n) {
+		Integer ret=0;
+		String sql="insert into news (title,description,category,url,start,ending,imagen,id_state,id_user) values (?,?,?,?,?,?,?,?,?)";
+		ret=JdbcTemplate.update(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getStart(),n.getEnding(),n.getImagen(),
+				n.getId_state(),n.getId_users());
 		
-		return false;
+		
+		if(ret.equals(1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
 	}
 
 }

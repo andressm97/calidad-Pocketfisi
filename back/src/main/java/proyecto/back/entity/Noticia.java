@@ -14,6 +14,7 @@ public class Noticia {
 	private String imagen;
 	private int id_state;
 	private String id_users;
+	
 	public int getId_news() {
 		return id_news;
 	}
