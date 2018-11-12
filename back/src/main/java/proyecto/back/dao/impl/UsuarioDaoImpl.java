@@ -110,4 +110,18 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 		
 	}
 
+
+
+
+
+	@Override
+	public Usuario getUsuarioWebByUsername(String username,String password) {
+		String sql="select * from users where username=CONCAT(?,'@unmsm.edu.pe') and password=? and id_profile<> '05' and id_profile<> '06'";
+		RowMapper<Usuario> rowMapper =new BeanPropertyRowMapper<Usuario>(Usuario.class);
+		
+		Usuario usuario= JdbcTemplate.queryForObject(sql, rowMapper,username,password);
+		
+		return usuario;
+	}
+
 }

@@ -35,7 +35,9 @@ public class UsuarioService {
 	}
 	
 	
-	
+	public Usuario getUsuarioWebByUsername(String username,String pas) {
+		return usuarioDAO.getUsuarioWebByUsername(username,pas);
+	}
 	
 
 }

@@ -11,7 +11,9 @@ public interface IUsuarioDAO {
 	boolean agregarUsuario(Usuario usuario);
 	//void actualizarUsuario(Usuario usuario);
 	//void eliminarUsuario(String id_usuario);
-	boolean getIdUsuario(String id_user); 
+	boolean getIdUsuario(String id_user);
+	
+	Usuario getUsuarioWebByUsername(String username,String password);
 	
 	Usuario mostrarUsuario(String username,String pasword); 
 		
