@@ -3,6 +3,7 @@ package proyecto.back.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -31,18 +32,20 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 	
 	@Override
 	public boolean agregarNoticia(Noticia n) {
-		Integer ret=0;
-		String sql="insert into news (title,description,category,url,start,ending,imagen,id_state,id_user) values (?,?,?,?,?,?,?,?,?)";
-		ret=JdbcTemplate.update(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getStart(),n.getEnding(),n.getImagen(),
-				n.getId_state(),n.getId_users());
+		String sql="select fn_crear_noticia(?,?,?,?,?,?);";
+		
+		try {
+		
+		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImagen(),n.getId_users());
+		return true;
+		
+		}catch (DataAccessException e) {
+			System.out.println("error al agregar noticia"+ e.getMessage());
+		
+		return false;
+		}
 		
 		
-		if(ret.equals(1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
 		
 		
 	}
