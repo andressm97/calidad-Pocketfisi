@@ -2,7 +2,6 @@ package proyecto.back.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -26,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import proyecto.back.entity.CursosSUM;
 import proyecto.back.entity.Usuario;
+import proyecto.back.entity.UsuarioCambioPass;
 import proyecto.back.service.UsuarioService;
 
 @CrossOrigin
@@ -67,120 +66,106 @@ public class UsuarioController {
 		
 		
 		
-		@RequestMapping(value="/inserte", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+		@RequestMapping(value="/insertar", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 		public boolean InsertarUsuarioValidado(@RequestBody Usuario usuario) throws IOException {
 			
+			boolean resp=false;
+			logger.info("DATOS LEIDOS:" + usuario.toString());
+			//traer datos del sum
 			
-			System.out.println("usuario : "+usuario.toString());
-			
-
 			URL url = new URL("https://sum-calidad.herokuapp.com/usuario/"+usuario.getUsername());
 			ObjectMapper mapper = new ObjectMapper();
 			TypeReference<Usuario> typeReference = new TypeReference<Usuario>(){};
 			InputStream inputStream = url.openStream();
-			boolean resp=false;
+			
+			
 			try {
 				Usuario users = mapper.readValue(inputStream,typeReference);
-				System.out.println("USUARIOS EXISTE EN SUM : " + users.toString());
+				
+				logger.info(" USUARIO EXISTE EN EL SUM :" + users.toString());
+				
+				
 				usuario.setId_user(users.getId_user());
 				usuario.setId_profile(users.getId_profile());
 				usuario.setLastname(users.getLastname());
 				usuario.setName(users.getName());
+				usuario.setUsername(usuario.getUsername()+"@unmsm.edu.pe");
 				
-				System.out.println("usuario competo : "+usuario.toString());
+			
+				logger.info(" USUARIO :" + usuario.toString());
 				
 				try {
-					logger.info("respuesta");
-					logger.info("idusuario"+usuario.getId_user());
-					if(!service.getIdUsuario(usuario.getId_user())) {
-						
-						usuario.setToQuery(true);
-						logger.info("no existe");
-					}
-					else {
-						usuario.setToQuery(false);
-						logger.info("existe");
-					}
+					
+					
+					resp= service.agregarUsuario(usuario);
 					
 					
 					
-					logger.info("agregado"+ resp);
+					logger.info("AGREGADO : "+ resp);
 					
 				}	catch(Exception e) {
-					
-					logger.info("catch" + e.getMessage());
-					logger.info("insertarusuario"+ usuario);
-					return false;
+					//ya existe o hay codigo duplicado
+					logger.info(" ERROR DE INSERCION :" + e.getMessage());
+					//logger.info("insertarusuario"+ usuario);
+					return resp;
 				}
-				resp= service.agregarUsuario(usuario);
-				
-				return resp;
-				
-				
-				
-				
-				
-				
-				
-				
-				
+	
 			} catch (IOException e){
 				
-				
-				System.out.println(" USUARIO NO EXISTE EN SUM : " + e.getMessage());
+				logger.info(" USUARIO NO EXISTE EN EL SUM :" + e.getMessage());
 				return false;
 				
 			}
-
-			
-			
-			
-
-		}
-		
-		
-		@RequestMapping(value="/insertar", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-		public boolean InsertarUsuario(@RequestBody Usuario usuario) {
-			
-			logger.info(">insertarUsuario["+usuario+"]"+" "+usuario.getId_user());
-			
-			boolean resp=false;
-			try {
-				logger.info("respuesta");
-				logger.info("idusuario"+usuario.getId_user());
-				if(!service.getIdUsuario(usuario.getId_user())) {
-					
-					usuario.setToQuery(true);
-					logger.info("no existe");
-				}
-				else {
-					usuario.setToQuery(false);
-					logger.info("existe");
-				}
-				
-				
-				
-				logger.info("agregado"+ resp);
-				
-			}
-			catch(Exception e) {
-				
-				logger.info("catch" + e.getMessage());
-				logger.info("insertarusuario"+ usuario);
-				return false;
-			}
-			
-			resp= service.agregarUsuario(usuario);
 			
 			return resp;
+
 			
 			
 			
-			
-			
-			
-			
+
 		}
+		
+		
+//		@RequestMapping(value="/insertar", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+//		public boolean InsertarUsuario(@RequestBody Usuario usuario) {
+//			
+//			logger.info(">insertarUsuario["+usuario+"]"+" "+usuario.getId_user());
+//			
+//			boolean resp=false;
+//			try {
+//				logger.info("respuesta");
+//				logger.info("idusuario"+usuario.getId_user());
+//				if(!service.getIdUsuario(usuario.getId_user())) {
+//					
+//					usuario.setToQuery(true);
+//					logger.info("no existe");
+//				}
+//				else {
+//					usuario.setToQuery(false);
+//					logger.info("existe");
+//				}
+//				
+//				
+//				
+//				logger.info("agregado"+ resp);
+//				
+//			}
+//			catch(Exception e) {
+//				
+//				logger.info("catch" + e.getMessage());
+//				logger.info("insertarusuario"+ usuario);
+//				return false;
+//			}
+//			
+//			resp= service.agregarUsuario(usuario);
+//			
+//			return resp;
+//				
+//			
+//		}
+		
+		
+	
 		@RequestMapping(value="/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<Map<Object, Object>> VerificarUsuario(@RequestBody Usuario usuario){
 			
@@ -247,7 +232,20 @@ public class UsuarioController {
 			
 			
 		}
+		
+		@RequestMapping(value="/cambiopass", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+		
+		public boolean CambiarPassword(@RequestBody UsuarioCambioPass usuario) {
 			
+			logger.info(">mostrarusuario : "+usuario.toString());
+			
+			return service.usuarionewpass(usuario.getUsuario(), usuario.getOldpass(), usuario.getNewpass());
+			
+			
+		}
+			
+		
+		
 			
 			
 			

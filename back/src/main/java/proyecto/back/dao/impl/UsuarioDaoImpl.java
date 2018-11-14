@@ -36,17 +36,17 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 	public boolean agregarUsuario(Usuario usuario) {
 		Integer ret=0;
 		String sql="";
-		if(usuario.getToQuery()) {
-		System.out.println("insert");
+		
+		System.out.println("insertando");
 		sql="insert into users (id_user,name,lastname,username,password,mobile,id_profile) values (?,?,?,?,?,?,?)";
 		ret=JdbcTemplate.update(sql,usuario.getId_user(),usuario.getName(),usuario.getLastname(),usuario.getUsername(),usuario.getPassword(),usuario.getMobile(),usuario.getId_profile());
 		
-		}
-		else {
-			System.out.println("update");
-			sql="UPDATE users SET name=?,lastname=?,username=?,password=?,mobile=?,id_profile=? where id_user=?";
-			ret=JdbcTemplate.update(sql,usuario.getName(),usuario.getLastname(),usuario.getUsername(),usuario.getPassword(),usuario.getMobile(),usuario.getId_profile(),usuario.getId_user());
-		}
+		
+		
+			//System.out.println("update");
+			//sql="UPDATE users SET name=?,lastname=?,username=?,password=?,mobile=?,id_profile=? where id_user=?";
+			//ret=JdbcTemplate.update(sql,usuario.getName(),usuario.getLastname(),usuario.getUsername(),usuario.getPassword(),usuario.getMobile(),usuario.getId_profile(),usuario.getId_user());
+		
 		
 		System.out.println("respuesta sql"+ret);
 		
@@ -101,7 +101,8 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 
 	@Override
 	public Usuario mostrarUsuario(String username, String password) {
-			
+		
+		
 		String sql="select *from users where username=CONCAT(?,'@unmsm.edu.pe') and password=?";
 		RowMapper<Usuario> rowMapper =new BeanPropertyRowMapper<Usuario>(Usuario.class);
 		Usuario alumno = JdbcTemplate.queryForObject(sql, rowMapper,username,password);
@@ -122,6 +123,26 @@ public class UsuarioDaoImpl implements IUsuarioDAO{
 		Usuario usuario= JdbcTemplate.queryForObject(sql, rowMapper,username,password);
 		
 		return usuario;
+	}
+
+
+
+
+
+	@Override
+	public boolean UsuarioCambioPass(String username, String oldpas, String newpas) {
+		
+		String sql="select fn_cambiar_contraseña(CONCAT(?,'@unmsm.edu.pe'),?,?)";
+		try {
+			
+			JdbcTemplate.queryForRowSet(sql,username,oldpas,newpas);
+			return true;
+			
+		}catch (DataAccessException e) {
+			System.out.println("ERROR AL CAMBIAR CLAVE : "+e.getMessage());
+			return false;
+		}
+		
 	}
 
 }

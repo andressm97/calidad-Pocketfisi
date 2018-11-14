@@ -64,13 +64,16 @@ public class Usuario {
 	public void setId_profile(String id_profile) {
 		this.id_profile = id_profile;
 	}
-	
-	
-	 @Override
+	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return id_user+" "+name+" "+ lastname+" "+ " "+username+" "+password+" "+ mobile+" "+ id_profile;
+		return "Usuario [id_user=" + id_user + ", name=" + name + ", lastname=" + lastname + ", username=" + username
+				+ ", password=" + password + ", mobile=" + mobile + ", id_profile=" + id_profile + ", toQuery="
+				+ toQuery + "]";
 	}
 	
+	
+	
+	
+	 
 	
 }

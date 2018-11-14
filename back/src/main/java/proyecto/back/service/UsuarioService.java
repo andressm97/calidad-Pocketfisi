@@ -39,5 +39,9 @@ public class UsuarioService {
 		return usuarioDAO.getUsuarioWebByUsername(username,pas);
 	}
 	
+	public boolean usuarionewpass(String username,String oldpass,String newpass) {
+		return usuarioDAO.UsuarioCambioPass(username, oldpass, newpass);
+	}
+	
 
 }

@@ -16,6 +16,8 @@ public interface IUsuarioDAO {
 	Usuario getUsuarioWebByUsername(String username,String password);
 	
 	Usuario mostrarUsuario(String username,String pasword); 
+	
+	boolean UsuarioCambioPass(String userame,String oldpas,String newpas);
 		
 	
 
