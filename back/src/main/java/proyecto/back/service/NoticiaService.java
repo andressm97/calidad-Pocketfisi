@@ -22,4 +22,14 @@ public class NoticiaService {
 		return iNoticiaDAO.agregarNoticia(noticia);
 	}
 	
+	public Noticia noticiaByCodigo(int id) {
+		return iNoticiaDAO.NoticiaByCodigo(id);
+	}
+	public boolean NoticiaDelete(int id) {
+		return iNoticiaDAO.NoticiaDelete(id);
+	}
+	
+	public boolean NoticiaEditar(int id,Noticia noticia) {
+		return iNoticiaDAO.NoticiaEditar(id, noticia);
+	}
 }
