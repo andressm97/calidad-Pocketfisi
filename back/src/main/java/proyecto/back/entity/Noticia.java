@@ -69,11 +69,11 @@ public class Noticia {
 	public void setId_state(int id_state) {
 		this.id_state = id_state;
 	}
-	public String getId_users() {
+	public String getId_user() {
 		return id_user;
 	}
-	public void setId_users(String id_users) {
-		this.id_user = id_users;
+	public void setId_user(String id_user) {
+		this.id_user = id_user;
 	}
 	
 	@Override

@@ -21,7 +21,7 @@ public class NoticiaRowMapper implements RowMapper<Noticia> {
 		n.setEnding(rs.getDate("ending"));
 		n.setImagen(rs.getString("imagen"));
 		n.setId_state(rs.getInt("id_state"));
-		n.setId_users(rs.getString("id_user"));
+		n.setId_user(rs.getString("id_user"));
 		
 		return n;
 	}

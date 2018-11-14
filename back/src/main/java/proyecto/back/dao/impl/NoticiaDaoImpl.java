@@ -37,7 +37,7 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 		
 		try {
 		
-		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImagen(),n.getId_users());
+		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImagen(),n.getId_user());
 		return true;
 		
 		}catch (DataAccessException e) {
@@ -83,7 +83,7 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 				"where id_news=?";
 		Integer ret=0;
 		ret=JdbcTemplate.update(sql,noticia.getTitle(),noticia.getDescription(),noticia.getCategory(),noticia.getUrl(),
-				noticia.getEnding(),noticia.getImagen(),noticia.getId_users(),id);
+				noticia.getEnding(),noticia.getImagen(),noticia.getId_user(),id);
 		
 		if(ret.equals(1)) {
 			return true;
