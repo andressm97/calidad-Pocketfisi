@@ -13,7 +13,7 @@ public class Noticia {
 	private Date ending;
 	private String imagen;
 	private int id_state;
-	private String id_users;
+	private String id_user;
 	
 	public int getId_news() {
 		return id_news;
@@ -70,17 +70,17 @@ public class Noticia {
 		this.id_state = id_state;
 	}
 	public String getId_users() {
-		return id_users;
+		return id_user;
 	}
 	public void setId_users(String id_users) {
-		this.id_users = id_users;
+		this.id_user = id_users;
 	}
 	
 	@Override
 	public String toString() {
 		return "Noticia [id_news=" + id_news + ", title=" + title + ", description=" + description + ", category="
 				+ category + ", url=" + url + ", start=" + start + ", ending=" + ending + ", imagen=" + imagen
-				+ ", id_state=" + id_state + ", id_users=" + id_users + "]";
+				+ ", id_state=" + id_state + ", id_users=" + id_user + "]";
 	}
 	
 	
