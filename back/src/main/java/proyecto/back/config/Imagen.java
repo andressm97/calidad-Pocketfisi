@@ -47,26 +47,26 @@ public class Imagen {
 		return new ResponseEntity<Object>("correcto", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/get",method=RequestMethod.GET)
-	public void getImagen(HttpServletResponse response) throws IOException {
-		
-		InputStream in= getClass().getResourceAsStream("../img/fondo2.jpg");
-		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-		IOUtils.copy(in, response.getOutputStream());
-		
-	}
-	
-	@GetMapping(
-			  value = "/get2",
-			  produces = MediaType.IMAGE_JPEG_VALUE
-			)
-			public @ResponseBody byte[] getImageWithMediaType() throws IOException {
-			    InputStream in = getClass()
-			      .getResourceAsStream("fondo.jpg");
-			    
-			    return IOUtils.toByteArray(in);
-			}
-	
+//	@RequestMapping(value="/get",method=RequestMethod.GET)
+//	public void getImagen(HttpServletResponse response) throws IOException {
+//		
+//		InputStream in= getClass().getResourceAsStream("../img/fondo2.jpg");
+//		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//		IOUtils.copy(in, response.getOutputStream());
+//		
+//	}
+//	
+//	@GetMapping(
+//			  value = "/get2",
+//			  produces = MediaType.IMAGE_JPEG_VALUE
+//			)
+//			public @ResponseBody byte[] getImageWithMediaType() throws IOException {
+//			    InputStream in = getClass()
+//			      .getResourceAsStream("fondo.jpg");
+//			    
+//			    return IOUtils.toByteArray(in);
+//			}
+//	
 	
 	
 	
