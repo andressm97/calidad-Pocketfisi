@@ -12,4 +12,8 @@ public interface INoticiaDAO {
 	Noticia NoticiaByCodigo(int id);
 	boolean NoticiaDelete(int id);
 	boolean NoticiaEditar(int id,Noticia noticia);
+	
+	byte[] ImagenNoticia(int id);
+	
+	
 }

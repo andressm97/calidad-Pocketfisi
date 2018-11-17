@@ -68,7 +68,7 @@ public class Imagen {
 			)
 			public @ResponseBody byte[] getImageWithMediaType() throws IOException {
 			    
-			String sql="select img  from news where id_news=1";
+			String sql="select img  from news where id_news=21";
 			List<Map<String, Object>> result = JdbcTemplate.queryForList(sql);
 			if (!result.isEmpty()) {
 				
@@ -99,8 +99,8 @@ public class Imagen {
 		        
 		        System.out.println("xdsdasdasda :"+pixel.toString());
 		        
-		        String sql = "UPDATE news  set img=? where id_news =1;";
-		        JdbcTemplate.update(sql,pixel);
+		       // String sql = "UPDATE news  set img=? where id_news =21;";
+		       // JdbcTemplate.update(sql,pixel);
 		        
 
 		    }

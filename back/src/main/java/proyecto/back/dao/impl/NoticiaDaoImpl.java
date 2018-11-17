@@ -1,6 +1,7 @@
 package proyecto.back.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -31,13 +32,14 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 	}
 	
 	
+	
 	@Override
 	public boolean agregarNoticia(Noticia n) {
 		String sql="select fn_crear_noticia(?,?,?,?,?,?);";
 		
 		try {
 		
-		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImagen(),n.getId_user());
+		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImg(),n.getId_user());
 		return true;
 		
 		}catch (DataAccessException e) {
@@ -83,7 +85,7 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 				"where id_news=?";
 		Integer ret=0;
 		ret=JdbcTemplate.update(sql,noticia.getTitle(),noticia.getDescription(),noticia.getCategory(),noticia.getUrl(),
-				noticia.getEnding(),noticia.getImagen(),noticia.getId_user(),id);
+				noticia.getEnding(),noticia.getImg(),noticia.getId_user(),id);
 		
 		if(ret.equals(1)) {
 			return true;
@@ -92,6 +94,31 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 			return false;
 		}
 		
+		
+	}
+
+
+
+	@Override
+	public byte[] ImagenNoticia(int id) {
+		String sql="select img  from news where id_news=?";
+		
+		try {
+			
+		
+		List<Map<String, Object>> result = JdbcTemplate.queryForList(sql,id);
+		if (!result.isEmpty()) {
+			
+			byte[] bytes = (byte[]) result.get(0).get("img");
+		    //return IOUtils.toByteArray(in);
+		    return bytes;
+		}
+		
+		}catch (Exception e) {
+			System.out.println("error al leer imagen : "+e.getMessage());
+			
+		}
+		return null;
 		
 	}
 

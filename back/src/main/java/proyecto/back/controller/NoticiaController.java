@@ -1,5 +1,6 @@
 package proyecto.back.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import proyecto.back.entity.Noticia;
 import proyecto.back.service.NoticiaService;
@@ -52,14 +54,43 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping(value="/agregar", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public boolean agregarNoticias(@RequestBody Noticia noticia) {
+	public boolean agregarNoticias(
+									@RequestParam("file") MultipartFile file,
+									@RequestParam("title") String title,
+									@RequestParam("description") String description,
+									@RequestParam("category")String category,
+									@RequestParam("url") String url,
+									@RequestParam("id_user")String id_user
+			
+			
+			
+			) throws IOException {
+		
+		Noticia noticia = new Noticia();
+		noticia.setTitle(title);
+		noticia.setDescription(description);
+		noticia.setCategory(category);
+		noticia.setUrl(url);
+		noticia.setId_user(id_user);
+		
 		
 		logger.info(">insertarNoticia :" + noticia.toString() );
 		
 		
 		try {
 			
-			
+			if (!file.isEmpty()) {
+
+				System.out.println("imagen correcta");
+//		        String nombre = file.getOriginalFilename();
+//		        String tipo   = file.getContentType();
+//		        Long tamano   = file.getSize();
+		        byte[] pixel  = file.getBytes();
+		        
+		        noticia.setImagen(pixel);
+
+		    }
+		
 			return service.agregarNoticia(noticia);
 			
 		}catch (DataAccessException e) {
@@ -75,6 +106,18 @@ public class NoticiaController {
 		
 		
 	}
+	
+	@RequestMapping(value="/imagen/{id}", method = RequestMethod.GET,produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] MostrarImagen(@PathVariable("id") Integer id) {
+		
+		return service.ImgNoticia(id);
+		
+		
+	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="/listar/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Noticia> listarNoticiasByCodigo(@PathVariable("id") Integer id){

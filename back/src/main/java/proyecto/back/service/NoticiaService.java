@@ -32,4 +32,8 @@ public class NoticiaService {
 	public boolean NoticiaEditar(int id,Noticia noticia) {
 		return iNoticiaDAO.NoticiaEditar(id, noticia);
 	}
+	public byte[] ImgNoticia(int id) {
+		
+		return iNoticiaDAO.ImagenNoticia(id);
+	}
 }

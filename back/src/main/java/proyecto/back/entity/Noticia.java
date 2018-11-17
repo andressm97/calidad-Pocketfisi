@@ -11,7 +11,7 @@ public class Noticia {
 	private String url;
 	private Date start;
 	private Date ending;
-	private String imagen;
+	private byte[] img;
 	private int id_state;
 	private String id_user;
 	
@@ -57,11 +57,11 @@ public class Noticia {
 	public void setEnding(Date ending) {
 		this.ending = ending;
 	}
-	public String getImagen() {
-		return imagen;
+	public byte[] getImg() {
+		return img;
 	}
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setImagen(byte[] img) {
+		this.img = img;
 	}
 	public int getId_state() {
 		return id_state;
@@ -79,7 +79,7 @@ public class Noticia {
 	@Override
 	public String toString() {
 		return "Noticia [id_news=" + id_news + ", title=" + title + ", description=" + description + ", category="
-				+ category + ", url=" + url + ", start=" + start + ", ending=" + ending + ", imagen=" + imagen
+				+ category + ", url=" + url + ", start=" + start + ", ending=" + ending + ", imagen=" + img
 				+ ", id_state=" + id_state + ", id_users=" + id_user + "]";
 	}
 	

@@ -19,7 +19,7 @@ public class NoticiaRowMapper implements RowMapper<Noticia> {
 		n.setUrl(rs.getString("url"));
 		n.setStart(rs.getDate("start"));
 		n.setEnding(rs.getDate("ending"));
-		n.setImagen(rs.getString("imagen"));
+		n.setImagen(rs.getBytes("img"));
 		n.setId_state(rs.getInt("id_state"));
 		n.setId_user(rs.getString("id_user"));
 		
