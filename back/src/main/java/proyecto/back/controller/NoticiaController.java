@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import proyecto.back.entity.Noticia;
-import proyecto.back.entity.Suscriptores;
 import proyecto.back.service.NoticiaService;
 @CrossOrigin 
 @RestController
