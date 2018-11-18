@@ -52,6 +52,7 @@ public class DelegadoController {
 					Map<String,String> Map2= new HashMap<>();
 					Map2.put("nombre",curso.getCurso());
 					Map2.put("profesor",curso.getProfesor());
+					//Map2.put
 					Map.put("curso",Map2);
 					return new ResponseEntity<Map<Object,Object>>(Map, HttpStatus.OK);
 				}

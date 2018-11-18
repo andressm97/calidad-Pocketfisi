@@ -2,7 +2,7 @@ package proyecto.back.entity;
 
 import java.sql.Date;
 
-public class Noticia {
+public class Noticia2 {
 	
 	private int id_news;
 	private String title; 
@@ -10,11 +10,21 @@ public class Noticia {
 	private String category;
 	private String url;
 	private Date start;
-	private Date ending;
-	private byte[] img;
+	private Date ending; 
 	private int id_state;
 	private String id_user;
+	private String direction;
 	
+	
+	
+	
+	
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
 	public int getId_news() {
 		return id_news;
 	}
@@ -57,12 +67,7 @@ public class Noticia {
 	public void setEnding(Date ending) {
 		this.ending = ending;
 	}
-	public byte[] getImg() {
-		return img;
-	}
-	public void setImg(byte[] img) {
-		this.img = img;
-	}
+
 	public int getId_state() {
 		return id_state;
 	}
@@ -79,12 +84,8 @@ public class Noticia {
 	@Override
 	public String toString() {
 		return "Noticia [id_news=" + id_news + ", title=" + title + ", description=" + description + ", category="
-				+ category + ", url=" + url + ", start=" + start + ", ending=" + ending + ", imagen=" + img
+				+ category + ", url=" + url + ", start=" + start + ", ending=" + ending + ", direction=" + direction
 				+ ", id_state=" + id_state + ", id_users=" + id_user + "]";
 	}
-	
-	
-	
-	
-	
+
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import proyecto.back.entity.Noticia;
+import proyecto.back.entity.Noticia2;
 import proyecto.back.service.NoticiaService;
 @CrossOrigin 
 @RestController
@@ -31,24 +32,24 @@ public class NoticiaController {
 	@Autowired
 	private NoticiaService service;
 	@RequestMapping(value="/listar", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Noticia>> listarNoticias(){
+	public ResponseEntity<List<Noticia2>> listarNoticias(){
 		
-		List<Noticia> list = null;
+		List<Noticia2> list = null;
 		try {
 			
 			list = service.listarNoticias();
 			
 			if (list == null) {
-				list = new ArrayList<Noticia>();
+				list = new ArrayList<Noticia2>();
 			}
 		} catch (Exception e) {
 
-			return new ResponseEntity<List<Noticia>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<Noticia2>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 
 
-		return new ResponseEntity<List<Noticia>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<Noticia2>>(list, HttpStatus.OK);
 		
 		
 	}
@@ -66,7 +67,7 @@ public class NoticiaController {
 			
 			) throws IOException {
 		
-		Noticia noticia = new Noticia();
+		Noticia2 noticia = new Noticia2();
 		noticia.setTitle(title);
 		noticia.setDescription(description);
 		noticia.setCategory(category);
@@ -76,7 +77,7 @@ public class NoticiaController {
 		
 		logger.info(">insertarNoticia :" + noticia.toString() );
 		
-		
+		 byte[] pixel = null ;
 		try {
 			
 			if (!file.isEmpty()) {
@@ -85,13 +86,13 @@ public class NoticiaController {
 //		        String nombre = file.getOriginalFilename();
 //		        String tipo   = file.getContentType();
 //		        Long tamano   = file.getSize();
-		        byte[] pixel  = file.getBytes();
+		      pixel  = file.getBytes();
 		        
-		        noticia.setImagen(pixel);
+		        
 
 		    }
 		
-			return service.agregarNoticia(noticia);
+			return service.agregarNoticia(noticia,pixel);
 			
 		}catch (DataAccessException e) {
 			
@@ -120,20 +121,20 @@ public class NoticiaController {
 	
 	
 	@RequestMapping(value="/listar/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Noticia> listarNoticiasByCodigo(@PathVariable("id") Integer id){
+	public ResponseEntity<Noticia2> listarNoticiasByCodigo(@PathVariable("id") Integer id){
 	
 		
 		
 		try {
 			
-			Noticia noticia=service.noticiaByCodigo(id);
-			return new ResponseEntity<Noticia>(noticia, HttpStatus.OK);
+			Noticia2 noticia=service.noticiaByCodigo(id);
+			return new ResponseEntity<Noticia2>(noticia, HttpStatus.OK);
 			
 			
 		}catch (DataAccessException e) {
 			
 			
-			return new ResponseEntity<Noticia>(new Noticia(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Noticia2>(new Noticia2(),HttpStatus.BAD_REQUEST);
 			
 		}
 

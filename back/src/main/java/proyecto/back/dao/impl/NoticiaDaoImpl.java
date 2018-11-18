@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proyecto.back.dao.INoticiaDAO;
 import proyecto.back.entity.Noticia;
+import proyecto.back.entity.Noticia2;
 import proyecto.back.rowmapper.NoticiaRowMapper;
 
 
@@ -23,10 +24,10 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 	@Autowired
 	JdbcTemplate JdbcTemplate;
 	@Override
-	public List<Noticia> ListarNoticias() {
+	public List<Noticia2> ListarNoticias() {
 		
-		String sql= "select * from news";
-		RowMapper<Noticia> noticia= new NoticiaRowMapper();
+		String sql= "select id_news,title,description,category,url,start,ending,id_state,id_user,direction from news";
+		RowMapper<Noticia2> noticia= new NoticiaRowMapper();
 		
 		return this.JdbcTemplate.query(sql, noticia);
 	}
@@ -34,12 +35,15 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 	
 	
 	@Override
-	public boolean agregarNoticia(Noticia n) {
-		String sql="select fn_crear_noticia(?,?,?,?,?,?);";
-		
+	public boolean agregarNoticia(Noticia2 n,byte [] img) {
+		String sql="select fn_crear_noticia(?,?,?,?,?,?,?);";
+		//direccion desde donde se leen las imagenes en el servidor
+		String direccion="https://calidad-pf.herokuapp.com/noticias/imagen";
 		try {
 		
-		JdbcTemplate.queryForRowSet(sql,n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),n.getImg(),n.getId_user());
+		String codigo=JdbcTemplate.queryForObject(sql,new Object[] {n.getTitle(),n.getDescription(),n.getCategory(),n.getUrl(),img,direccion,n.getId_user()},String.class);
+		
+		System.out.println("codigo de la noticia insertada :" +codigo);
 		return true;
 		
 		}catch (DataAccessException e) {
@@ -55,10 +59,10 @@ public class NoticiaDaoImpl implements INoticiaDAO {
 
 
 	@Override
-	public Noticia NoticiaByCodigo(int id) {
-		String sql="select * from news where id_news=?";
-		RowMapper<Noticia> rowMapper = new BeanPropertyRowMapper<Noticia>(Noticia.class);
-		Noticia noticia=  JdbcTemplate.queryForObject(sql, rowMapper,id);
+	public Noticia2 NoticiaByCodigo(int id) {
+		String sql="select id_news,title,description,category,url,start,ending,id_state,id_user,direction from news where id_news=?";
+		RowMapper<Noticia2> rowMapper = new BeanPropertyRowMapper<Noticia2>(Noticia2.class);
+		Noticia2 noticia=  JdbcTemplate.queryForObject(sql, rowMapper,id);
 		return noticia;
 	}
 

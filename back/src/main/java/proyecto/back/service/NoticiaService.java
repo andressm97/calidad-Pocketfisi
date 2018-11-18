@@ -7,22 +7,23 @@ import org.springframework.stereotype.Service;
 
 import proyecto.back.dao.INoticiaDAO;
 import proyecto.back.entity.Noticia;
+import proyecto.back.entity.Noticia2;
 
 @Service
 public class NoticiaService {
 	@Autowired
 	INoticiaDAO iNoticiaDAO;
 	
-	public List<Noticia> listarNoticias(){
-		List<Noticia> lista=iNoticiaDAO.ListarNoticias();
+	public List<Noticia2> listarNoticias(){
+		List<Noticia2> lista=iNoticiaDAO.ListarNoticias();
 		return lista;
 	}
 	
-	public boolean agregarNoticia(Noticia noticia) {
-		return iNoticiaDAO.agregarNoticia(noticia);
+	public boolean agregarNoticia(Noticia2 n,byte [] img) {
+		return iNoticiaDAO.agregarNoticia(n,img);
 	}
 	
-	public Noticia noticiaByCodigo(int id) {
+	public Noticia2 noticiaByCodigo(int id) {
 		return iNoticiaDAO.NoticiaByCodigo(id);
 	}
 	public boolean NoticiaDelete(int id) {
