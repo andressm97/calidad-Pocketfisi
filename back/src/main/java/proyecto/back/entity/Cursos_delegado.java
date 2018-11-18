@@ -5,6 +5,14 @@ public class Cursos_delegado {
 	private int codigo;
 	private String curso;
 	private String profesor;
+	private String salon;
+	
+	public String getSalon() {
+		return salon;
+	}
+	public void setSalon(String salon) {
+		this.salon = salon;
+	}
 	public int getCodigo() {
 		return codigo;
 	}
@@ -23,11 +31,12 @@ public class Cursos_delegado {
 	public void setProfesor(String profesor) {
 		this.profesor = profesor;
 	}
-	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "codigo: "+codigo+" "+"curso: "+curso+"profesor: "+profesor;
+		return "Cursos_delegado [codigo=" + codigo + ", curso=" + curso + ", profesor=" + profesor + ", salon=" + salon
+				+ "]";
 	}
+	
+	
 
 }
