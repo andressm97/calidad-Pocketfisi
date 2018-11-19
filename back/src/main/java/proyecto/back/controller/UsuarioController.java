@@ -73,7 +73,7 @@ public class UsuarioController {
 			logger.info("DATOS LEIDOS:" + usuario.toString());
 			//traer datos del sum
 			
-			URL url = new URL("https://sum-calidad.herokuapp.com/usuario/"+usuario.getUsername());
+			URL url = new URL("https://sum-calidad.herokuapp.com/usuario/"+usuario.getUsername()+"/"+usuario.getPassword());
 			ObjectMapper mapper = new ObjectMapper();
 			TypeReference<Usuario> typeReference = new TypeReference<Usuario>(){};
 			InputStream inputStream = url.openStream();
@@ -89,8 +89,7 @@ public class UsuarioController {
 				usuario.setId_profile(users.getId_profile());
 				usuario.setLastname(users.getLastname());
 				usuario.setName(users.getName());
-				usuario.setUsername(usuario.getUsername()+"@unmsm.edu.pe");
-				
+				usuario.setUsername(users.getUsername());
 			
 				logger.info(" USUARIO :" + usuario.toString());
 				
