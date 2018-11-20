@@ -1,5 +1,6 @@
 package proyecto.back.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class DelegadoDaoImpl implements IDelegadoDAO {
 	public Cursos_delegado mostrarcursos(String codigo, int hora) {
 		
 		try {
-		String sql="select * from fn_llamar_soporte(?,?) LIMIT 1";
+		String sql="select * from fn_llamar_soporte2(?,?) LIMIT 1";
 		RowMapper<Cursos_delegado> rowMapper= new BeanPropertyRowMapper<Cursos_delegado>(Cursos_delegado.class);
 		Cursos_delegado curso=jdbcTemplate.queryForObject(sql,rowMapper,codigo,hora);
 		return  curso;
@@ -40,11 +41,18 @@ public class DelegadoDaoImpl implements IDelegadoDAO {
 
 	@Override
 	public List<Delegado> cursosDelegado(String codigo) {
-		
-		String sql="select * from delegates where id_user=?";
+		try {
+//		String sql="select * from delegates where id_user=?";
+		String sql="select * from fn_consulta(?)";
 		RowMapper<Delegado>rowMapper=new DelegadoRowMapper();
 		
 		return jdbcTemplate.query(sql,rowMapper,codigo);
+		
+		}catch (DataAccessException e) {
+			System.out.println("error codigo fake"+ e.getMessage());
+			return new ArrayList<Delegado>();
+			// TODO: handle exception
+		}
 	}
 
 	@Override
